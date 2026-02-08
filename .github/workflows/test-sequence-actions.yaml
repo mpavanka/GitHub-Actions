@@ -6,6 +6,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Run a test command
         run: echo "Testing successfully"
