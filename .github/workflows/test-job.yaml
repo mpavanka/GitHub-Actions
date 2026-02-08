@@ -1,0 +1,18 @@
+name: Practice github actions
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/chekout@v4
+
+      - name: Run a test command
+        run: echo "Testing successfully"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploying code
+        run: echo "Deployment successful"
