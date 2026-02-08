@@ -1,0 +1,22 @@
+name: input-and-output-params
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment'
+        required: true
+        default: 'production'
+        options:
+          - production
+          - staging
+          - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run a test command
+        run: echo "Testing successfully" in ${{ github.event.inputs.environment }} environment

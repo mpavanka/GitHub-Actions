@@ -1,5 +1,5 @@
-name: Practice github actions
-on: push
+name: checkout github actions
+on: workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-latest
