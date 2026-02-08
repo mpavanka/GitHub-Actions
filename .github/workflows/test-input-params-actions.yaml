@@ -1,4 +1,5 @@
 name: input-and-output-params
+
 on:
   workflow_dispatch:
     inputs:
@@ -11,21 +12,27 @@ on:
           - production
           - staging
           - development
-      Tag:
-        description: 'Enter the tag name'
+
+      tag:
+        description: 'Select the tag name'
         required: true
+        default: '@test'
         type: choice
         options:
-          - @test
-          - @latest
-          - @v1.0.0
+          - '@test'
+          - '@latest'
+          - '@v1.0.0'
 
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run a test command
-        run: echo "Testing successfully" in ${{ github.event.inputs.environment }} environment
+      - name: Print environment
+        run: echo "Testing successfully in ${{ github.event.inputs.environment }} environment"
+
+      - name: Print tag
+        run: echo "Running tests with tag ${{ github.event.inputs.tag }}"
