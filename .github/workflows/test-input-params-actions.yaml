@@ -14,7 +14,6 @@ on:
       Tag:
         description: 'Enter the tag name'
         required: true
-        default: 'v1.0.0'
         type: choice
         options:
           - @test
