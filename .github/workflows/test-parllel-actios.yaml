@@ -1,4 +1,4 @@
-name: Practice github actions
+name: parallel github actions
 on: push
 jobs:
   test:
