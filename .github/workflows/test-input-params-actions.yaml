@@ -36,3 +36,6 @@ jobs:
 
       - name: Print tag
         run: echo "Running tests with tag ${{ github.event.inputs.tag }}"
+
+      - name: print branch name
+        run: echo "Branch name is ${{ github.ref_name }}"
