@@ -1,0 +1,15 @@
+name: run on failure
+on:
+  workflow_run:
+    workflows: [ "input-and-output-params" ]
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+
+jobs:
+  run-on-failure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run a test command
+        run: echo "Running on failure of Automation Tests workflow"

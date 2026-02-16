@@ -22,6 +22,16 @@ on:
           - '@test'
           - '@latest'
           - '@v1.0.0'
+
+      exit_code:
+        description: 'Select the exit code'
+        required: true
+        default: '0'
+        type: choice
+        options:
+          - '0'
+          - '1'
+          - '2'
 jobs:
   job_parameters:
     runs-on: ubuntu-latest
@@ -46,3 +56,6 @@ jobs:
 
       - name: print branch name
         run: echo "Branch name is ${{ github.ref_name }}"
+
+      - name: Exit with selected code
+        run: exit ${{ github.event.inputs.exit_code }}
