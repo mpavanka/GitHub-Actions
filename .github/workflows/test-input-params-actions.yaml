@@ -9,9 +9,9 @@ on:
         default: 'production'
         type: choice
         options:
-          - production
-          - staging
-          - development
+          - 'production'
+          - 'staging'
+          - 'development'
 
       tag:
         description: 'Select the tag name'
@@ -22,8 +22,15 @@ on:
           - '@test'
           - '@latest'
           - '@v1.0.0'
-
 jobs:
+  job_parameters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print selected values through input parameters
+        run: |
+        echo "Selected environment is : ${{ github.event.inputs.environment }}"
+        echo "selected tag is : ${{ github.event.inputs.tag }}"
+
   test:
     runs-on: ubuntu-latest
 
