@@ -2,11 +2,13 @@ name: run on failure
 on:
   workflow_run:
     workflows: [ "input-and-output-params" ]
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    types:
+      - completed
 
 jobs:
   run-on-failure:
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
