@@ -33,7 +33,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-
+    needs: job_parameters
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
