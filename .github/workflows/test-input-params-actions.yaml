@@ -28,8 +28,8 @@ jobs:
     steps:
       - name: print selected values through input parameters
         run: |
-        echo "Selected environment is : ${{ github.event.inputs.environment }}"
-        echo "selected tag is : ${{ github.event.inputs.tag }}"
+          echo "Selected environment is :" ${{ github.event.inputs.environment }}
+          echo "selected tag is :" ${{ github.event.inputs.tag }}
 
   test:
     runs-on: ubuntu-latest
