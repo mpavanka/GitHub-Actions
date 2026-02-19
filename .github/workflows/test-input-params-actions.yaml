@@ -32,33 +32,28 @@ on:
           - '0'
           - '1'
           - '2'
+
 jobs:
+
   job_parameters:
     runs-on: ubuntu-latest
     steps:
-      - name: print selected values through input parameters
+      - name: print selected values
         run: |
-          echo "Selected environment is :" ${{ github.event.inputs.environment }}
-          echo "selected tag is :" ${{ github.event.inputs.tag }}
+          echo "Selected environment: ${{ github.event.inputs.environment }}"
+          echo "Selected tag: ${{ github.event.inputs.tag }}"
 
   test:
     runs-on: ubuntu-latest
     needs: job_parameters
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Print environment
-        run: echo "Testing successfully in ${{ github.event.inputs.environment }} environment"
+      - run: echo "Testing in ${{ github.event.inputs.environment }} environment"
+      - run: echo "Running tests with tag ${{ github.event.inputs.tag }}"
+      - run: echo "Branch name is ${{ github.ref_name }}"
+      - run: exit ${{ github.event.inputs.exit_code }}
 
-      - name: Print tag
-        run: echo "Running tests with tag ${{ github.event.inputs.tag }}"
-
-      - name: deploy to maven central
-        uses: ./.github/workflows/ci-maven.yml
-
-      - name: print branch name
-        run: echo "Branch name is ${{ github.ref_name }}"
-
-      - name: Exit with selected code
-        run: exit ${{ github.event.inputs.exit_code }}
+  maven_deploy:
+    needs: test
+    uses: ./.github/workflows/ci-maven.yml
