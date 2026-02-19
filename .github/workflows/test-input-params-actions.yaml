@@ -55,7 +55,7 @@ jobs:
         run: echo "Running tests with tag ${{ github.event.inputs.tag }}"
 
       - name: deploy to maven central
-        run: .github/workflows/ci-maven.yml
+        uses: ./.github/workflows/ci-maven.yml
 
       - name: print branch name
         run: echo "Branch name is ${{ github.ref_name }}"
