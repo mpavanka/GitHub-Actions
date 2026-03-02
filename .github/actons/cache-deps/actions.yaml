@@ -1,0 +1,16 @@
+name: cache dependencies
+description: Cache dependencies for faster builds
+
+runs:
+  using: "composite"
+  steps:
+    - name: Cache Maven dependencies
+      id: cache_mvn
+      uses: actions/cache@v5
+      with:
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+
+    - name: install dependencies
+      if: steps.cache_mvn.outputs.cache-hit != 'true'
+      run: mvn clean install
