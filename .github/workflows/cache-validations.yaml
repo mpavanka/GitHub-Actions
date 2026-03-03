@@ -1,5 +1,13 @@
 name: cache validation
-on: workflow_dispatch
+on:
+  workflow_dispatch:
+    inputs:
+      caching:
+        description: 'Select caching option'
+        required: true
+        default: true
+        type: boolean
+
 jobs:
   cache-validation:
     runs-on: ubuntu-latest
@@ -16,6 +24,9 @@ jobs:
 
       - name: cache mcn dependence
         uses: ./.github/actions/cache-deps
+        with:
+          caching: ${{ github.event.inputs.caching }}
+
 
 
       
