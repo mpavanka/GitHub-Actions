@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
     inputs:
       caching:
-        description: 'Select caching option'
+        description: 'Enable or disable caching'
         required: true
         default: true
         type: boolean
