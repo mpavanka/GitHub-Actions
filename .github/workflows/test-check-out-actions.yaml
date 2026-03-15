@@ -29,7 +29,7 @@ jobs:
           curl -X POST \
           -H "Authorization: token ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/mpavanka/rest-Assured/dispatches \
+          https://api.github.com/repos/mpavanka/rest-Assuerd/dispatches \
           -d '{
             "event_type": "run-automation-tests",
             "client_payload": {
