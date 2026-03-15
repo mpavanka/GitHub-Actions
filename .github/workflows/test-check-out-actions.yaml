@@ -24,17 +24,28 @@ jobs:
       - name: deploying code
         run: echo "Deployment successful"
 
-      - name: Trigger Automation Repo
-        run: |
-          curl -X POST \
-          -H "Authorization: token ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}" \
-          -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/mpavanka/rest-Assuerd/dispatches \
-          -d '{
-            "event_type": "run-automation-tests",
-            "client_payload": {
-              "environment": "qa",
-              "tag": "@Test",
-              "branch": "main"
-            }
-          }'
+      #      - name: Trigger Automation Repo
+      #        run: |
+      #          curl -X POST \
+      #          -H "Authorization: token ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}" \
+      #          -H "Accept: application/vnd.github.v3+json" \
+      #          https://api.github.com/repos/mpavanka/rest-Assuerd/dispatches \
+      #          -d '{
+      #            "event_type": "run-automation-tests",
+      #            "client_payload": {
+      #              "environment": "qa",
+      #              "tag": "@Test",
+      #              "branch": "main"
+      #            }
+      #          }'
+
+
+
+  run-automation-tests:
+    needs: deploy
+    uses:
+      mpavanka/rest-Assuerd/.github/workflows/automation-test.yaml@main
+    with:
+      environment: qa
+      tag: "@Test"
+      branch: main
