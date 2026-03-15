@@ -26,10 +26,10 @@ jobs:
 
       - name: Trigger Automation Repo
         run: |
-          curl -i -X POST \
+          curl -X POST \
           -H "Authorization: token ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}" \
           -H "Accept: application/vnd.github.v3+json" \
-          https://api.github.com/repos/mpavanka/GitHub-Actions/dispatches \
+          https://api.github.com/repos/mpavanka/rest-Assured/dispatches \
           -d '{
             "event_type": "run-automation-tests",
             "client_payload": {
