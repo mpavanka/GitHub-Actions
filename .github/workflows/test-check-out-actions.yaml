@@ -48,4 +48,3 @@ jobs:
     with:
       environment: qa
       tag: "@Test"
-      branch: main
