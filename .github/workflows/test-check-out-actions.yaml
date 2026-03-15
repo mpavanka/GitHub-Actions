@@ -43,8 +43,7 @@ jobs:
 
   run-automation-tests:
     needs: deploy
-    uses:
-      mpavanka/rest-Assuerd/.github/workflows/automation-test.yaml@main
+    uses: mpavanka/rest-Assuerd/.github/workflows/automation-test.yaml@main
     with:
       environment: qa
       tag: "@Test"
