@@ -16,3 +16,7 @@ jobs:
     steps:
       - name: deploying code
         run: echo "Deployment successful"
+
+  run-automation-tests:
+    uses: mpavanka/rest-Assuerd/.github/workflows/automation.yaml@main
+
