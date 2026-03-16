@@ -1,0 +1,47 @@
+name: checkout github actions
+
+on: workflow_dispatch
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Run a test command
+        run: echo "Testing successfully"
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: deploying code
+        run: echo "Deployment successful"
+
+      - name: Trigger Automation Repo
+        run: |
+          curl -X POST \
+          -H "Authorization: token ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}" \
+          -H "Accept: application/vnd.github.v3+json" \
+          https://api.github.com/repos/mpavanka/rest-Assuerd/dispatches \
+          -d '{
+            "event_type": "run-automation-tests",
+            "client_payload": {
+              "environment": "qa",
+              "tag": "@Test",
+              "branch": "main"
+            }
+          }'
+  run-automation-tests:
+    uses: mpavanka/rest-Assuerd/.github/workflows/automation-test.yaml@main
+    with:
+      environment: qa
+      Tag: "@Test"
+    secrets:
+      repo-token: ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}

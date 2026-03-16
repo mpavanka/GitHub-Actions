@@ -1,13 +1,11 @@
 name: Practice github actions
-on: [push, workflow_dispatch]
+on: workflow_dispatch
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: main
 
       - name: Run a test command
         run: echo "Testing successfully"
@@ -18,3 +16,7 @@ jobs:
     steps:
       - name: deploying code
         run: echo "Deployment successful"
+
+  run-automation-tests:
+    uses: mpavanka/rest-Assuerd/.github/workflows/automation.yaml@main
+

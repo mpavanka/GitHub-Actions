@@ -1,0 +1,10 @@
+name: Re-usable file
+
+on: workflow_call
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy to maven central
+        run: echo "Deploying to from other file"

@@ -1,0 +1,32 @@
+name: cache validation
+on:
+  workflow_dispatch:
+    inputs:
+      caching:
+        description: 'Enable or disable caching'
+        required: true
+        default: true
+        type: boolean
+
+jobs:
+  cache-validation:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 and cache Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: cache mcn dependence
+        uses: ./.github/actions/cache-deps
+        with:
+          caching: ${{ github.event.inputs.caching }}
+
+
+
+      

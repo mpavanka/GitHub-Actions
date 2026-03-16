@@ -1,0 +1,59 @@
+name: input-and-output-params
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Select the environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - 'production'
+          - 'staging'
+          - 'development'
+
+      tag:
+        description: 'Select the tag name'
+        required: true
+        default: '@test'
+        type: choice
+        options:
+          - '@test'
+          - '@latest'
+          - '@v1.0.0'
+
+      exit_code:
+        description: 'Select the exit code'
+        required: true
+        default: '0'
+        type: choice
+        options:
+          - '0'
+          - '1'
+          - '2'
+
+jobs:
+
+  job_parameters:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print selected values
+        run: |
+          echo "Selected environment: ${{ github.event.inputs.environment }}"
+          echo "Selected tag: ${{ github.event.inputs.tag }}"
+
+  test:
+    runs-on: ubuntu-latest
+    needs: job_parameters
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: echo "Testing in ${{ github.event.inputs.environment }} environment"
+      - run: echo "Running tests with tag ${{ github.event.inputs.tag }}"
+      - run: echo "Branch name is ${{ github.ref_name }}"
+      - run: exit ${{ github.event.inputs.exit_code }}
+
+  maven_deploy:
+    needs: test
+    uses: ./.github/workflows/ci-maven.yml
