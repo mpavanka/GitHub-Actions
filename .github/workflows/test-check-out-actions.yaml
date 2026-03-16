@@ -47,3 +47,4 @@ jobs:
     with:
       environment: qa
       Tag: "@Test"
+    secrets: inherit
