@@ -43,4 +43,5 @@ jobs:
     with:
       environment: qa
       Tag: "@Test"
-    secrets: inherit
+    secrets:
+      repo-token: ${{ secrets.AUTOMATION_TRIGGER_TOKEN }}
