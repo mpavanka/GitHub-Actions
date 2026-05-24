@@ -1,0 +1,27 @@
+name: QA Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Test tag"
+        required: false
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run QA Helper
+        id: qahelper
+        uses: ./.github/actions/qa-helper
+        with:
+          tag: ${{ github.event.inputs.tag }}
+          report_path: reports/result.json
+          file1: expected.txt
+          file2: actual.txt
+
+      - name: Execute Tests
+        run: ${{ steps.qahelper.outputs.test_command }}

@@ -1,0 +1,10 @@
+{
+  "@actions/github": "^5.1.0"
+  "@actions/core": "^1.10.0",
+  "dependencies": {
+    "main": "index.js",
+    "description": "QA helper GitHub Action",
+    "version": "1.0.0",
+    "name": "qa-helper"
+  }
+}

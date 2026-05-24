@@ -1,0 +1,23 @@
+name: "QA Helper Action"
+description: "Handles test selection, report parsing, and file comparison"
+
+inputs:
+  tag:
+    description: "Test tag like @smoke or @regression"
+    required: false
+
+  report_path:
+    description: "Path to JSON report"
+    required: false
+
+  file1:
+    description: "File 1 for comparison"
+    required: false
+
+  file2:
+    description: "File 2 for comparison"
+    required: false
+
+runs:
+  using: "node20"
+  main: "index.js"
