@@ -18,10 +18,12 @@ jobs:
     steps:
       - id: map
         run: |
-          case "${{ inputs.environment }}" in
+          # Use the declared workflow input name 'env' (not 'environment')
+          case "${{ inputs.env }}" in
             dev) echo "runner=ubuntu-latest" >> "$GITHUB_OUTPUT" ;;
-            qa) echo "runner=pavan-self-hosted-test-qa-runner" >> "$GITHUB_OUTPUT" ;;
-            staging) echo "runner=self-hosted-staging" >> "$GITHUB_OUTPUT" ;;
+            prod) echo "runner=ubuntu-latest" >> "$GITHUB_OUTPUT" ;;
+            staging) echo "runner=pavan-self-hosted-test-qa-runner" >> "$GITHUB_OUTPUT" ;;
+            *) echo "runner=ubuntu-latest" >> "$GITHUB_OUTPUT" ;;
           esac
   test:
     needs: set-runner
