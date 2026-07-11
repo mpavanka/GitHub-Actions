@@ -1,0 +1,37 @@
+name: test the multiple runners
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        description: 'Environment to run the tests'
+        required: true
+        default: 'dev'
+        options:
+          - dev
+          - staging
+          - prod
+jobs:
+  set-runner:
+    runs-on: ubuntu-latest
+    outputs:
+      runner: ${{ steps.map.outputs.runner }}
+    steps:
+      - id: map
+        run: |
+          case "${{ inputs.environment }}" in
+            dev) echo "runner=ubuntu-latest" >> "$GITHUB_OUTPUT" ;;
+            qa) echo "runner=pavan-self-hosted-test-qa-runner" >> "$GITHUB_OUTPUT" ;;
+            staging) echo "runner=self-hosted-staging" >> "$GITHUB_OUTPUT" ;;
+          esac
+  test:
+    needs: set-runner
+    runs-on: ${{ needs.set-runner.outputs.runner }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run tests
+        run: |
+          echo "Running tests on ${{ needs.set-runner.outputs.runner }} environment"
+          # Add your test commands here
+
