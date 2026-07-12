@@ -34,6 +34,12 @@
             <version>1.42.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.7.4</version>
+        </dependency>
+
         <!-- WebDriver Manager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
@@ -168,6 +174,13 @@
                         <include>**/*test.java</include>
                     </includes>
                 </configuration>
+            </plugin>
+
+            <!-- Exec Maven Plugin for running main classes -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.1.0</version>
             </plugin>
         </plugins>
     </build>
