@@ -58,3 +58,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Create index.html redirect
+        run: |
+          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0; url=overview-features.html"></head><body>Redirecting...</body></html>' > cucumber-html-reports/index.html
+        shell: bash
